@@ -9,6 +9,8 @@ import com.example.Knights.Domain.Interfaces.IKnightService;
 import com.example.Knights.Domain.Repositories.IKnightRepository;
 import com.example.Knights.Domain.Response.RestException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -153,5 +156,12 @@ public class KnightService implements IKnightService {
         List<Ammunition> needed = ammunitions.stream().filter(x -> x.getPrice() <= rLim && x.getPrice() >= lLim).collect(Collectors.toList());
         logger.info("Knight ammunition was found by price range from "+lLim+" to "+rLim);
         return new ResponseEntity(needed, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<ObservableList<KnightViewModel>> getAllKnights() {
+        ObservableList<Knight> knightsViewModel= FXCollections.observableArrayList();
+        knightRepository.findAll().forEach(knightsViewModel::add);
+        return new ResponseEntity(knightsViewModel,HttpStatus.OK);
     }
 }

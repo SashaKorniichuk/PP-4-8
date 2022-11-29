@@ -46,4 +46,15 @@ public class KnightViewModel {
     public void setHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
     }
+
+    @Override
+    public String toString() {
+        return "KnightViewModel{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", hitPoints=" + hitPoints +
+                '}';
+    }
 }

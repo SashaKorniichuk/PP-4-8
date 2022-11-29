@@ -6,21 +6,43 @@ import com.example.Knights.Domain.Response.BaseResponse;
 import com.example.Knights.Domain.ApiModels.KnightViewModel;
 import com.example.Knights.Domain.Response.RestException;
 import com.example.Knights.Domain.Services.KnightService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-@CrossOrigin(origins = "http://localhost:8080")
-@RestController
-@RequestMapping("/api")
+@Component
+@FxmlView("knights.fxml")
 public class KnightController {
-    private final KnightService knightService;
 
+    @FXML
+    private Button backButton;
+
+    @FXML
+    private ListView<KnightViewModel> knightList;
+
+    private KnightService knightService;
+
+    @Autowired
     public KnightController(KnightService knightService) {
         this.knightService = knightService;
+
+    }
+
+    @FXML
+    void back(ActionEvent event) {
+        this.knightList.setItems(knightService.getAllKnights().getBody());
     }
 
     @PostMapping("/addKnight")

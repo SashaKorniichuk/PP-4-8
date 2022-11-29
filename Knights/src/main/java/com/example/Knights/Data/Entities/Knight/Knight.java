@@ -86,4 +86,15 @@ public class Knight {
     public void setAmmunitions(List<Ammunition> ammunitions) {
         this.ammunitions = ammunitions;
     }
+
+    @Override
+    public String toString() {
+        return "Knight{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", hitPoints=" + hitPoints +
+                '}';
+    }
 }
