@@ -1,20 +1,21 @@
 package com.example.Knights.Domain.CommandPattern;
 
-import com.example.Knights.Domain.ApiModels.AmmunitionViewModel;
+import com.example.Knights.Data.Entities.Ammunition.Ammunition;
 import com.example.Knights.Domain.Response.RestException;
 import com.example.Knights.Domain.Services.KnightService;
+import javafx.collections.ObservableList;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public class KnightAmmunitionByCostRangeCommand implements Command<ResponseEntity<List<AmmunitionViewModel>>>{
+public class KnightAmmunitionByCostRangeCommand implements Command<ResponseEntity<ObservableList<Ammunition>>>{
 
     private final KnightService knightService;
     private final long knightId;
-    private final double lLim;
-    private final double rLim;
+    private final int lLim;
+    private final int rLim;
 
-    public KnightAmmunitionByCostRangeCommand(KnightService knightService, long knightId, double lLim, double rLim) {
+    public KnightAmmunitionByCostRangeCommand(KnightService knightService, long knightId, int lLim, int rLim) {
         this.knightService = knightService;
         this.knightId = knightId;
         this.lLim = lLim;
@@ -22,7 +23,7 @@ public class KnightAmmunitionByCostRangeCommand implements Command<ResponseEntit
     }
 
     @Override
-    public ResponseEntity<List<AmmunitionViewModel>> execute()throws RestException {
+    public ResponseEntity<ObservableList<Ammunition>> execute()throws RestException {
        return knightService.findAmmunitionByCostRange(knightId,lLim,rLim);
     }
 }

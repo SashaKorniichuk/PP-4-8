@@ -2,9 +2,7 @@ package com.example.Knights.Domain.Services;
 
 import com.example.Knights.Data.Entities.Ammunition.Ammunition;
 import com.example.Knights.Data.Entities.Knight.Knight;
-import com.example.Knights.Domain.ApiModels.AmmunitionViewModel;
 import com.example.Knights.Domain.Response.BaseResponse;
-import com.example.Knights.Domain.ApiModels.KnightViewModel;
 import com.example.Knights.Domain.Interfaces.IKnightService;
 import com.example.Knights.Domain.Repositories.IKnightRepository;
 import com.example.Knights.Domain.Response.RestException;
@@ -18,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +32,7 @@ public class KnightService implements IKnightService {
     }
 
     @Override
-    public ResponseEntity<BaseResponse> addKnight(KnightViewModel knightViewModel) {
+    public ResponseEntity<BaseResponse> addKnight(Knight knightViewModel) {
         try {
             knightRepository.save(new Knight(knightViewModel.getTitle(), knightViewModel.getName(), knightViewModel.getAge(), knightViewModel.getHitPoints()));
             logger.info("Knight was added");
@@ -47,7 +44,7 @@ public class KnightService implements IKnightService {
     }
 
     @Override
-    public ResponseEntity<BaseResponse> updateKnight(KnightViewModel knightViewModel, Long id) {
+    public ResponseEntity<BaseResponse> updateKnight(Knight knightViewModel, Long id) {
         try {
             var knight = knightRepository.findById(id);
 
@@ -89,7 +86,7 @@ public class KnightService implements IKnightService {
     }
 
     @Override
-    public ResponseEntity<List<AmmunitionViewModel>> knightAmmunition(Long id) throws RestException {
+    public ResponseEntity<ObservableList<Ammunition>> knightAmmunition(Long id) throws RestException {
 
         var optionalKnight = knightRepository.findById(id);
 
@@ -99,14 +96,17 @@ public class KnightService implements IKnightService {
         }
         Knight knight = optionalKnight.get();
 
-        List ammunitions = knight.getAmmunitions();
+        ObservableList<Ammunition> ammunitions=FXCollections.observableArrayList();
+        ammunitions.setAll(knight.getAmmunitions());
+
         logger.info("Knight ammunition was found");
+
         return new ResponseEntity<>(ammunitions, HttpStatus.OK);
 
     }
 
     @Override
-    public ResponseEntity<List<AmmunitionViewModel>> knightAmmunitionByWeight(Long id) throws RestException {
+    public ResponseEntity<ObservableList<Ammunition>> knightAmmunitionByWeight(Long id) throws RestException {
 
         var optionalKnight = knightRepository.findById(id);
 
@@ -116,15 +116,17 @@ public class KnightService implements IKnightService {
         }
         Knight knight = optionalKnight.get();
 
-        List ammunitions = knight.getAmmunitions();
+        ObservableList<Ammunition> ammunitions=FXCollections.observableArrayList();
+        ammunitions.setAll(knight.getAmmunitions());
 
         ammunitions.sort(Comparator.comparingDouble(Ammunition::getWeight));
+
         logger.info("Knight ammunition was sort by weight");
-        return new ResponseEntity<>(ammunitions, HttpStatus.OK);
+        return new ResponseEntity(ammunitions, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<AmmunitionViewModel>> knightAmmunitionByCost(Long id) throws RestException {
+    public ResponseEntity<ObservableList<Ammunition>> knightAmmunitionByCost(Long id) throws RestException {
         var optionalKnight = knightRepository.findById(id);
 
         if (optionalKnight.isEmpty()) {
@@ -133,15 +135,17 @@ public class KnightService implements IKnightService {
         }
         Knight knight = optionalKnight.get();
 
-        List ammunitions = knight.getAmmunitions();
+        ObservableList<Ammunition> ammunitions=FXCollections.observableArrayList();
+        ammunitions.setAll(knight.getAmmunitions());
 
         ammunitions.sort(Comparator.comparingDouble(Ammunition::getPrice));
+
         logger.info("Knight ammunition was sort by price");
         return new ResponseEntity<>(ammunitions, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<AmmunitionViewModel>> findAmmunitionByCostRange(Long id, double lLim, double rLim) throws RestException {
+    public ResponseEntity<ObservableList<Ammunition>> findAmmunitionByCostRange(Long id, int lLim, int rLim) throws RestException {
         var optionalKnight = knightRepository.findById(id);
 
         if (optionalKnight.isEmpty()) {
@@ -153,15 +157,18 @@ public class KnightService implements IKnightService {
         List<Ammunition> ammunitions = knight.getAmmunitions();
 
         ammunitions.sort(Comparator.comparingDouble(Ammunition::getPrice));
-        List<Ammunition> needed = ammunitions.stream().filter(x -> x.getPrice() <= rLim && x.getPrice() >= lLim).collect(Collectors.toList());
+
+        ObservableList<Ammunition> needed=FXCollections.observableArrayList();
+        needed.setAll( ammunitions.stream().filter(x -> x.getPrice() <= rLim && x.getPrice() >= lLim).collect(Collectors.toList()));
+
         logger.info("Knight ammunition was found by price range from "+lLim+" to "+rLim);
         return new ResponseEntity(needed, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<ObservableList<KnightViewModel>> getAllKnights() {
-        ObservableList<Knight> knightsViewModel= FXCollections.observableArrayList();
-        knightRepository.findAll().forEach(knightsViewModel::add);
-        return new ResponseEntity(knightsViewModel,HttpStatus.OK);
+    public ResponseEntity<ObservableList<Knight>> getAllKnights() {
+        ObservableList<Knight> knights= FXCollections.observableArrayList();
+        knightRepository.findAll().forEach(knights::add);
+        return new ResponseEntity(knights,HttpStatus.OK);
     }
 }

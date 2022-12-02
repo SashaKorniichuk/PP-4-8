@@ -21,3 +21,9 @@
     -fx-content-display: LEFT;
     -fx-cursor:hand;
 }
+
+.label{
+    -fx-font-size: 25px;
+    -fx-font-family: 'Segoe Print';
+    -fx-font-weight:bold;
+}

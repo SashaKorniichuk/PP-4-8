@@ -13,9 +13,6 @@ import org.springframework.context.annotation.Bean;
 public class KnightsApplication {
 
 	public static void main(String[] args) {
-
-		//SpringApplication.run(KnightsApplicationFX.class, args);
-
 		Application.launch(KnightsApplicationFX.class, args);
 	}
 	@Bean

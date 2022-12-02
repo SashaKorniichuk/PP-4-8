@@ -4,10 +4,11 @@ import com.example.Knights.Data.Entities.Ammunition.Ammunition;
 import com.example.Knights.Data.Entities.Ammunition.Helm;
 import com.example.Knights.Data.Entities.Ammunition.Shield;
 import com.example.Knights.Data.Entities.Knight.Knight;
-import com.example.Knights.Domain.ApiModels.AmmunitionViewModel;
 import com.example.Knights.Domain.Repositories.IKnightRepository;
 import com.example.Knights.Domain.Response.RestException;
 import com.example.Knights.Domain.Services.KnightService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -43,12 +44,12 @@ public class KnightServiceTest {
     public void KnightAmmunitionSuccess(){
         Long id= 0L;
         Knight knight=new Knight("Duke","Ron",23,123);
-        List<AmmunitionViewModel> amm=new ArrayList<>();
-        ResponseEntity<List<AmmunitionViewModel>> response=new ResponseEntity<>(amm, HttpStatus.OK);
+        ObservableList<Ammunition> amm= FXCollections.observableArrayList();
+        ResponseEntity<ObservableList<Ammunition>> response=new ResponseEntity<>(amm, HttpStatus.OK);
         given(knightRepository.findById(id)).willReturn(Optional.of(knight));
 
         try{
-            final ResponseEntity<List<AmmunitionViewModel>> ammunition=knightService.knightAmmunition(id);
+            final ResponseEntity<ObservableList<Ammunition>> ammunition=knightService.knightAmmunition(id);
             assertEquals(response,ammunition);
         }catch (Exception e)
         {
@@ -70,7 +71,7 @@ public class KnightServiceTest {
         given(knightRepository.findById(id)).willReturn(Optional.of(knight));
 
         try{
-            final ResponseEntity<List<AmmunitionViewModel>> ammunition=knightService.knightAmmunitionByWeight(id);
+            final ResponseEntity<ObservableList<Ammunition>> ammunition=knightService.knightAmmunitionByWeight(id);
            assertEquals(amm.get(0),ammunition.getBody().get(0));
             assertEquals(amm.get(1),ammunition.getBody().get(1));
         }catch (Exception e)
@@ -93,7 +94,7 @@ public class KnightServiceTest {
         given(knightRepository.findById(id)).willReturn(Optional.of(knight));
 
         try{
-            final ResponseEntity<List<AmmunitionViewModel>> ammunition=knightService.knightAmmunitionByCost(id);
+            final ResponseEntity<ObservableList<Ammunition>> ammunition=knightService.knightAmmunitionByCost(id);
             assertEquals(amm.get(1),ammunition.getBody().get(1));
             assertEquals(amm.get(0),ammunition.getBody().get(0));
         }catch (Exception e)
@@ -116,7 +117,7 @@ public class KnightServiceTest {
         given(knightRepository.findById(id)).willReturn(Optional.of(knight));
 
         try{
-            final ResponseEntity<List<AmmunitionViewModel>> ammunition=knightService.findAmmunitionByCostRange(id,90,105);
+            final ResponseEntity<ObservableList<Ammunition>> ammunition=knightService.findAmmunitionByCostRange(id,90,105);
             assertEquals(Objects.requireNonNull(ammunition.getBody()).size(),1);
         }catch (Exception e)
         {

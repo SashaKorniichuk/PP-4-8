@@ -89,12 +89,6 @@ public class Knight {
 
     @Override
     public String toString() {
-        return "Knight{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", hitPoints=" + hitPoints +
-                '}';
+        return "Name: "+name +", Age: "+age+", Title: "+title+", Health: "+hitPoints;
     }
 }

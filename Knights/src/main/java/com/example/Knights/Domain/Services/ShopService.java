@@ -2,24 +2,24 @@ package com.example.Knights.Domain.Services;
 
 import com.example.Knights.Data.Entities.Ammunition.Ammunition;
 import com.example.Knights.Data.Entities.Knight.Knight;
-import com.example.Knights.Domain.ApiModels.AmmunitionViewModel;
 import com.example.Knights.Domain.Response.BaseResponse;
 import com.example.Knights.Domain.Interfaces.IShopService;
 import com.example.Knights.Domain.Repositories.IGenericRepository;
 import com.example.Knights.Domain.Repositories.IKnightRepository;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ShopService implements IShopService {
     private final IGenericRepository<Ammunition> ammunitionRepository;
     private final IKnightRepository knightRepository;
-
 
     public ShopService(IGenericRepository<Ammunition> ammunitionRepository, IKnightRepository knightRepository) {
         this.ammunitionRepository = ammunitionRepository;
@@ -49,8 +49,11 @@ public class ShopService implements IShopService {
     }
 
     @Override
-    public ResponseEntity<List<AmmunitionViewModel>> allAmmunition() {
-        ArrayList ammunition = (ArrayList) ammunitionRepository.findAll();
+    public ResponseEntity<ObservableList<Ammunition>> allAmmunition() {
+
+        ObservableList<Ammunition> ammunition= FXCollections.observableArrayList();
+        var amm=ammunitionRepository.findAll();
+        amm.forEach(ammunition::add);
         return new ResponseEntity<>(ammunition, HttpStatus.OK);
     }
 

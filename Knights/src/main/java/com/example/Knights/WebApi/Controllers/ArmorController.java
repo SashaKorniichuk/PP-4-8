@@ -1,6 +1,6 @@
 package com.example.Knights.WebApi.Controllers;
 
-import com.example.Knights.Domain.ApiModels.ArmorViewModel;
+import com.example.Knights.Data.Entities.Ammunition.Armor;
 import com.example.Knights.Domain.Response.BaseResponse;
 import com.example.Knights.Domain.Services.ArmorService;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +19,12 @@ public class ArmorController {
     }
 
     @PostMapping("/addArmor")
-    public ResponseEntity<BaseResponse> createArmor(@RequestBody ArmorViewModel armor) {
+    public ResponseEntity<BaseResponse> createArmor(@RequestBody Armor armor) {
         return armorService.addAmmunition(armor);
     }
 
     @PutMapping ("/updateArmor")
-    public ResponseEntity<BaseResponse> updateArmor(@RequestBody ArmorViewModel armor,Long id) {
+    public ResponseEntity<BaseResponse> updateArmor(@RequestBody Armor armor,Long id) {
         return armorService.updateAmmunition(armor,id);
     }
 

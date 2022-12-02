@@ -2,7 +2,6 @@ package com.example.Knights.Domain.Services;
 
 import com.example.Knights.Data.Entities.Ammunition.Shield;
 import com.example.Knights.Domain.Response.BaseResponse;
-import com.example.Knights.Domain.ApiModels.ShieldViewModel;
 import com.example.Knights.Domain.Repositories.IGenericRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,7 @@ public class ShieldService extends AmmunitionService<Shield> {
     @Override
     public ResponseEntity<BaseResponse> addAmmunition(Object ammunition) {
         try {
-            ShieldViewModel shield=(ShieldViewModel) ammunition;
+            Shield shield=(Shield) ammunition;
             shieldRepository.save(new Shield(shield.getName(),shield.getCanTakeDamage(), shield.getSize(),shield.getPrice(), shield.getWeight()));
             return new ResponseEntity<>(new BaseResponse("Ammunition Shield was added"), HttpStatus.CREATED);
         } catch (Exception e) {
@@ -35,7 +34,7 @@ public class ShieldService extends AmmunitionService<Shield> {
     @Override
     public ResponseEntity<BaseResponse> updateAmmunition(Object ammunition,Long id) {
         try {
-            ShieldViewModel shieldViewModel=(ShieldViewModel)ammunition;
+            Shield shieldViewModel=(Shield)ammunition;
             var shield=shieldRepository.findById(id);
 
             if(shield.isEmpty())

@@ -1,7 +1,7 @@
 package com.example.Knights.WebApi.Controllers;
 
+import com.example.Knights.Data.Entities.Ammunition.Sword;
 import com.example.Knights.Domain.Response.BaseResponse;
-import com.example.Knights.Domain.ApiModels.SwordViewModel;
 import com.example.Knights.Domain.Services.SwordService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +17,12 @@ public class SwordController {
     }
 
     @PostMapping("/addSword")
-    public ResponseEntity<BaseResponse> createShield(@RequestBody SwordViewModel sword) {
+    public ResponseEntity<BaseResponse> createShield(@RequestBody Sword sword) {
         return swordService.addAmmunition(sword);
     }
 
     @PutMapping ("/updateSword")
-    public ResponseEntity<BaseResponse> updateShield(@RequestBody SwordViewModel sword,Long id) {
+    public ResponseEntity<BaseResponse> updateShield(@RequestBody Sword sword,Long id) {
         return swordService.updateAmmunition(sword,id);
     }
 

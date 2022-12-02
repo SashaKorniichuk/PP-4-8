@@ -72,7 +72,7 @@ public class Sword extends Ammunition {
         }
         String swordType = twoHanded ? "two-handed" : "single-handed";
         return "\n" + "#Sword." + noname + "It`s " + swordType + " sword"
-                + ". It can inflict " + damage + " damage. " + super.toString();
+                + ". It can take " + damage + " damage. " + super.toString();
 
     }
 }

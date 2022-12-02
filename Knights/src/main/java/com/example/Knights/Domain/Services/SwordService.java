@@ -2,7 +2,6 @@ package com.example.Knights.Domain.Services;
 
 import com.example.Knights.Data.Entities.Ammunition.Sword;
 import com.example.Knights.Domain.Response.BaseResponse;
-import com.example.Knights.Domain.ApiModels.SwordViewModel;
 import com.example.Knights.Domain.Repositories.IGenericRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,7 @@ public class SwordService extends AmmunitionService<Sword> {
     @Override
     public ResponseEntity<BaseResponse> addAmmunition(Object ammunition) {
         try {
-            SwordViewModel sword=(SwordViewModel) ammunition;
+            Sword sword=(Sword) ammunition;
             swordRepository.save(new Sword(sword.getName(), sword.isTwoHanded(),sword.getDamage(),sword.getDmgRange(),sword.getPrice(), sword.getWeight()));
             return new ResponseEntity<>(new BaseResponse("Ammunition Sword was added"), HttpStatus.CREATED);
         } catch (Exception e) {
@@ -35,7 +34,7 @@ public class SwordService extends AmmunitionService<Sword> {
     @Override
     public ResponseEntity<BaseResponse> updateAmmunition(Object ammunition,Long id) {
         try {
-            SwordViewModel swordViewModel=(SwordViewModel)ammunition;
+            Sword swordViewModel=(Sword)ammunition;
             var sword=swordRepository.findById(id);
 
             if(sword.isEmpty())

@@ -1,7 +1,7 @@
 package com.example.Knights.WebApi.Controllers;
 
+import com.example.Knights.Data.Entities.Ammunition.Shield;
 import com.example.Knights.Domain.Response.BaseResponse;
-import com.example.Knights.Domain.ApiModels.ShieldViewModel;
 import com.example.Knights.Domain.Services.ShieldService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +18,12 @@ public class ShieldController {
     }
 
     @PostMapping("/addShield")
-    public ResponseEntity<BaseResponse> createShield(@RequestBody ShieldViewModel shield) {
+    public ResponseEntity<BaseResponse> createShield(@RequestBody Shield shield) {
         return shieldService.addAmmunition(shield);
     }
 
     @PutMapping ("/updateShield")
-    public ResponseEntity<BaseResponse> updateShield(@RequestBody ShieldViewModel shield,Long id) {
+    public ResponseEntity<BaseResponse> updateShield(@RequestBody Shield shield,Long id) {
         return shieldService.updateAmmunition(shield,id);
     }
 

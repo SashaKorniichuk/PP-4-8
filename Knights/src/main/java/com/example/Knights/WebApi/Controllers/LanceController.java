@@ -1,7 +1,7 @@
 package com.example.Knights.WebApi.Controllers;
 
+import com.example.Knights.Data.Entities.Ammunition.Lance;
 import com.example.Knights.Domain.Response.BaseResponse;
-import com.example.Knights.Domain.ApiModels.LanceViewModel;
 import com.example.Knights.Domain.Services.LanceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +18,12 @@ public class LanceController {
     }
 
     @PostMapping("/addLance")
-    public ResponseEntity<BaseResponse> createLance(@RequestBody LanceViewModel lance) {
+    public ResponseEntity<BaseResponse> createLance(@RequestBody Lance lance) {
         return lanceService.addAmmunition(lance);
     }
 
     @PutMapping ("/updateLance")
-    public ResponseEntity<BaseResponse> updateLance(@RequestBody LanceViewModel lance,Long id) {
+    public ResponseEntity<BaseResponse> updateLance(@RequestBody Lance lance,Long id) {
         return lanceService.updateAmmunition(lance,id);
     }
 

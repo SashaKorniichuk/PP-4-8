@@ -1,9 +1,7 @@
 package com.example.Knights.WebApi.Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -12,9 +10,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 @Component
 @FxmlView("menu.fxml")
@@ -37,14 +33,20 @@ public class MainController {
 
     @FXML
     void ammunition(ActionEvent event) {
-
+        String stylesheet = getClass().getResource("/css/styles.css").toExternalForm();
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxWeaver.loadView(KnightsAmmunitionController.class));
+        scene.getStylesheets().add(stylesheet);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
     void knights(ActionEvent event) throws IOException {
-
+        String stylesheet = getClass().getResource("/css/styles.css").toExternalForm();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxWeaver.loadView(KnightController.class));
+        scene.getStylesheets().add(stylesheet);
         stage.setScene(scene);
         stage.show();
 
@@ -52,6 +54,11 @@ public class MainController {
 
     @FXML
     void shop(ActionEvent event) {
-
+        String stylesheet = getClass().getResource("/css/styles.css").toExternalForm();
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxWeaver.loadView(ShopController.class));
+        scene.getStylesheets().add(stylesheet);
+        stage.setScene(scene);
+        stage.show();
     }
 }
