@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 @Transactional
 public class ArmorService extends AmmunitionService<Armor> {
 
+
     private final IGenericRepository<Armor> armorRepository;
 
     public ArmorService(IGenericRepository<Armor> armorRepository) {

@@ -23,7 +23,7 @@ public class LanceService extends AmmunitionService<Lance> {
     public ResponseEntity<BaseResponse> addAmmunition(Object ammunition) {
         try {
             Lance lance=(Lance) ammunition;
-            lanceRepository.save(new Lance(lance.getName(),lance.getLength(), lance.getDamage(),lance.getDmgRange(),lance.getPrice(), lance.getWeight()));
+            lanceRepository.save(new Lance(lance.getName(),lance.getLength(), lance.getDamage(),lance.getPrice(), lance.getWeight()));
             return new ResponseEntity<>(new BaseResponse("Ammunition Lance was added"), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new BaseResponse("Ammunition Lance was not added"), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -45,7 +45,6 @@ public class LanceService extends AmmunitionService<Lance> {
             updateLance.setName(lanceViewModel.getName());
             updateLance.setDamage(lanceViewModel.getDamage());
             updateLance.setLength(lanceViewModel.getLength());
-            updateLance.setDmgRange(lanceViewModel.getDmgRange());
             updateLance.setPrice(lanceViewModel.getPrice());
             updateLance.setWeight(lanceViewModel.getWeight());
 

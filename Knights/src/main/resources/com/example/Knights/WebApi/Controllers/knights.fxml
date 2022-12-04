@@ -19,8 +19,8 @@
          <Integer fx:id="min" fx:value="0"/>
          <Integer fx:id="max" fx:value="1000"/>
       </fx:define>
-      <Spinner fx:id="ageInput" layoutX="615.0" layoutY="255.0" min="$min" max="100" editable="true" />
-      <Spinner fx:id="healthInput" layoutX="615.0" layoutY="340.0" min="$min" max="$max" editable="true" />
+      <Spinner fx:id="ageInput" layoutX="615.0" layoutY="255.0" min="$min" max="100"  />
+      <Spinner fx:id="healthInput" layoutX="615.0" layoutY="340.0" min="$min" max="$max" />
       <Button fx:id="addButton" layoutX="600.0" layoutY="400.0" mnemonicParsing="false" onAction="#addKnight" text="Add knight" />
       <Label layoutX="664.0" layoutY="34.0" text="Name" />
       <Label layoutX="669.0" layoutY="118.0" text="Title" />

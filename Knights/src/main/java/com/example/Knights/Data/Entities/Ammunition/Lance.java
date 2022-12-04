@@ -14,15 +14,12 @@ public class Lance extends Ammunition {
     private int length;
     @Column(nullable=false)
     private int damage;
-    @Column(nullable=false)
-    private int dmgRange;
 
-    public Lance(String name,int length, int damage,int dmgRange, double price, double weight) {
+    public Lance(String name,int length, int damage, double price, double weight) {
         super(price, weight);
         this.name=name;
         this.length = length;
         this.damage = damage;
-        this.dmgRange=dmgRange;
     }
 
     public Lance() {
@@ -40,11 +37,6 @@ public class Lance extends Ammunition {
     public int getDamage() {
         return damage;
     }
-
-    public int getDmgRange() {
-        return dmgRange;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -57,9 +49,6 @@ public class Lance extends Ammunition {
         this.damage = damage;
     }
 
-    public void setDmgRange(int dmgRange) {
-        this.dmgRange = dmgRange;
-    }
 
 
     @Override

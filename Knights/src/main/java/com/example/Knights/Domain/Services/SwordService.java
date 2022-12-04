@@ -24,7 +24,7 @@ public class SwordService extends AmmunitionService<Sword> {
     public ResponseEntity<BaseResponse> addAmmunition(Object ammunition) {
         try {
             Sword sword=(Sword) ammunition;
-            swordRepository.save(new Sword(sword.getName(), sword.isTwoHanded(),sword.getDamage(),sword.getDmgRange(),sword.getPrice(), sword.getWeight()));
+            swordRepository.save(new Sword(sword.getName(), sword.isTwoHanded(),sword.getDamage(),sword.getPrice(), sword.getWeight()));
             return new ResponseEntity<>(new BaseResponse("Ammunition Sword was added"), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new BaseResponse("Ammunition Sword was not added"), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -45,7 +45,6 @@ public class SwordService extends AmmunitionService<Sword> {
 
             updateSword.setName(swordViewModel.getName());
             updateSword.setDamage(swordViewModel.getDamage());
-            updateSword.setDmgRange(swordViewModel.getDmgRange());
             updateSword.setTwoHanded(swordViewModel.isTwoHanded());
             updateSword.setPrice(swordViewModel.getPrice());
             updateSword.setWeight(swordViewModel.getWeight());

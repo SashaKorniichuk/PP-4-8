@@ -62,6 +62,53 @@ public class ShopController implements Initializable {
     }
 
     @FXML
+    void addArmor(ActionEvent event) {
+        String stylesheet = getClass().getResource("/css/styles.css").toExternalForm();
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxWeaver.loadView(ArmorController.class));
+        scene.getStylesheets().add(stylesheet);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    void addHelm(ActionEvent event) {
+        String stylesheet = getClass().getResource("/css/styles.css").toExternalForm();
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxWeaver.loadView(HelmController.class));
+        scene.getStylesheets().add(stylesheet);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    void addLance(ActionEvent event) {
+        String stylesheet = getClass().getResource("/css/styles.css").toExternalForm();
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxWeaver.loadView(LanceController.class));
+        scene.getStylesheets().add(stylesheet);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void addShield(ActionEvent event) {
+        String stylesheet = getClass().getResource("/css/styles.css").toExternalForm();
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxWeaver.loadView(ShieldController.class));
+        scene.getStylesheets().add(stylesheet);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void addSword(ActionEvent event) {
+        String stylesheet = getClass().getResource("/css/styles.css").toExternalForm();
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxWeaver.loadView(SwordController.class));
+        scene.getStylesheets().add(stylesheet);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
     void buy(ActionEvent event) {
         shopService.buyAmmunition(selectedAmmunitionId,selectedKnightId);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

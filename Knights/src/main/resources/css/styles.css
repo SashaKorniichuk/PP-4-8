@@ -27,3 +27,7 @@
     -fx-font-family: 'Segoe Print';
     -fx-font-weight:bold;
 }
+
+.choice-box .label{
+    -fx-font-size: 15px;
+}
