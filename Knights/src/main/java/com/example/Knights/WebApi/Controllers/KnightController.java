@@ -1,12 +1,7 @@
 package com.example.Knights.WebApi.Controllers;
 
-import com.example.Knights.Data.Entities.Ammunition.Ammunition;
 import com.example.Knights.Data.Entities.Knight.Knight;
-import com.example.Knights.Domain.CommandPattern.*;
-import com.example.Knights.Domain.Response.BaseResponse;
-import com.example.Knights.Domain.Response.RestException;
 import com.example.Knights.Domain.Services.KnightService;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,17 +13,12 @@ import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 @Component
-@CrossOrigin(origins = "http://localhost:8080")
-@RestController
-@RequestMapping("/api")
 @FxmlView("knights.fxml")
 public class KnightController implements Initializable {
 
@@ -76,7 +66,7 @@ public class KnightController implements Initializable {
 
         if (response.getStatusCode() == HttpStatus.CREATED) {
             alert.setContentText("Knight was added!");
-            this.knightList.setItems(knightService.getAllKnights().getBody());
+            this.knightList.setItems(knightService.getAllKnights());
         } else {
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setContentText("Knight was not added!");
@@ -94,47 +84,8 @@ public class KnightController implements Initializable {
         stage.show();
     }
 
-    @PostMapping("/addKnight")
-    public ResponseEntity<BaseResponse> createKnight(@RequestBody Knight knightViewModel) {
-        return knightService.addKnight(knightViewModel);
-    }
-
-    @PutMapping("/updateKnight")
-    public ResponseEntity<BaseResponse> updateKnight(@RequestBody Knight knightViewModel, Long id) {
-        return knightService.updateKnight(knightViewModel, id);
-    }
-
-    @DeleteMapping("/deleteKnight")
-    public ResponseEntity<BaseResponse> deleteKnight(Long id) {
-        return knightService.deleteKnight(id);
-    }
-
-    @GetMapping("/knightAmmunition")
-    public ResponseEntity<ObservableList<Ammunition>> knightAmmunition(Long id) throws RestException {
-        Command<ResponseEntity<ObservableList<Ammunition>>> ammunition = new KnightAmmunitionCommand(knightService, id);
-        return ammunition.execute();
-    }
-
-    @GetMapping("/knightAmmunitionByWeight")
-    public ResponseEntity<ObservableList<Ammunition>> knightAmmunitionByWeight(Long id) throws RestException {
-        Command<ResponseEntity<ObservableList<Ammunition>>> sortByWeight = new KnightAmmunitionByWeightCommand(knightService, id);
-        return sortByWeight.execute();
-    }
-
-    @GetMapping("/knightAmmunitionByCost")
-    public ResponseEntity<ObservableList<Ammunition>> knightAmmunitionByCost(Long id) throws RestException {
-        Command<ResponseEntity<ObservableList<Ammunition>>> sortByCost = new KnightAmmunitionByCostCommand(knightService, id);
-        return sortByCost.execute();
-    }
-
-    @GetMapping("/knightAmmunitionByCostRange")
-    public ResponseEntity<ObservableList<Ammunition>> knightAmmunitionByCostRange(Long id, int lLim, int rLim) throws RestException {
-        Command<ResponseEntity<ObservableList<Ammunition>>> ammunitionByCostRange = new KnightAmmunitionByCostRangeCommand(knightService, id, lLim, rLim);
-        return ammunitionByCostRange.execute();
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.knightList.setItems(knightService.getAllKnights().getBody());
+        this.knightList.setItems(knightService.getAllKnights());
     }
 }

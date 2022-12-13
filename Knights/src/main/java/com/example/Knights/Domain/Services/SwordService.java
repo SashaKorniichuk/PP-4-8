@@ -21,39 +21,13 @@ public class SwordService extends AmmunitionService<Sword> {
     }
 
     @Override
-    public ResponseEntity<BaseResponse> addAmmunition(Object ammunition) {
+    public BaseResponse addAmmunition(Object ammunition) {
         try {
             Sword sword=(Sword) ammunition;
             swordRepository.save(new Sword(sword.getName(), sword.isTwoHanded(),sword.getDamage(),sword.getPrice(), sword.getWeight()));
-            return new ResponseEntity<>(new BaseResponse("Ammunition Sword was added"), HttpStatus.CREATED);
+            return new BaseResponse("Ammunition Sword was added", HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>(new BaseResponse("Ammunition Sword was not added"), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
-    public ResponseEntity<BaseResponse> updateAmmunition(Object ammunition,Long id) {
-        try {
-            Sword swordViewModel=(Sword)ammunition;
-            var sword=swordRepository.findById(id);
-
-            if(sword.isEmpty())
-            {
-                return new ResponseEntity<>(new BaseResponse("Ammunition Sword was not found"), HttpStatus.NOT_FOUND);
-            }
-            Sword updateSword=sword.get();
-
-            updateSword.setName(swordViewModel.getName());
-            updateSword.setDamage(swordViewModel.getDamage());
-            updateSword.setTwoHanded(swordViewModel.isTwoHanded());
-            updateSword.setPrice(swordViewModel.getPrice());
-            updateSword.setWeight(swordViewModel.getWeight());
-
-            swordRepository.save(updateSword);
-
-            return new ResponseEntity<>(new BaseResponse("Ammunition Sword was updated"), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new BaseResponse("Ammunition Sword was not updated"), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new BaseResponse("Ammunition Sword was not added", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -1,8 +1,7 @@
 package com.example.Knights.WebApi.Controllers;
 
 import com.example.Knights.Data.Entities.Ammunition.Armor;
-import com.example.Knights.Data.Entities.Knight.Knight;
-import com.example.Knights.Domain.Response.BaseResponse;
+
 import com.example.Knights.Domain.Services.ArmorService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +15,7 @@ import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URL;
@@ -81,22 +80,6 @@ public class ArmorController implements Initializable {
         scene.getStylesheets().add(stylesheet);
         stage.setScene(scene);
         stage.show();
-    }
-
-
-    @PostMapping("/addArmor")
-    public ResponseEntity<BaseResponse> createArmor(@RequestBody Armor armor) {
-        return armorService.addAmmunition(armor);
-    }
-
-    @PutMapping ("/updateArmor")
-    public ResponseEntity<BaseResponse> updateArmor(@RequestBody Armor armor,Long id) {
-        return armorService.updateAmmunition(armor,id);
-    }
-
-    @DeleteMapping ("/deleteArmor")
-    public ResponseEntity<BaseResponse> deleteArmor(Long id) {
-        return armorService.deleteAmmunition(id);
     }
 
     @Override

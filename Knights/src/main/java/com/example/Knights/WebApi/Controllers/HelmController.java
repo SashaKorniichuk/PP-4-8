@@ -1,8 +1,6 @@
 package com.example.Knights.WebApi.Controllers;
 
-import com.example.Knights.Data.Entities.Ammunition.Armor;
 import com.example.Knights.Data.Entities.Ammunition.Helm;
-import com.example.Knights.Domain.Response.BaseResponse;
 import com.example.Knights.Domain.Services.HelmService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,15 +14,12 @@ import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-@CrossOrigin(origins = "http://localhost:8080")
-@RestController
-@RequestMapping("/api")
+@Component
 @FxmlView("helm.fxml")
 public class HelmController implements Initializable {
     @FXML
@@ -79,21 +74,6 @@ public class HelmController implements Initializable {
         scene.getStylesheets().add(stylesheet);
         stage.setScene(scene);
         stage.show();
-    }
-
-    @PostMapping("/addHelm")
-    public ResponseEntity<BaseResponse> createHelm(@RequestBody Helm helm) {
-        return helmService.addAmmunition(helm);
-    }
-
-    @PutMapping ("/updateHelm")
-    public ResponseEntity<BaseResponse> updateHelm(@RequestBody Helm helm,Long id) {
-        return helmService.updateAmmunition(helm,id);
-    }
-
-    @DeleteMapping ("/deleteHelm")
-    public ResponseEntity<BaseResponse> deleteHelm(Long id) {
-        return helmService.deleteAmmunition(id);
     }
 
     @Override

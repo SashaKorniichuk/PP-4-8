@@ -22,29 +22,7 @@ public  class AmmunitionService<T extends Ammunition> implements IAmmunitionServ
     }
 
     @Override
-    public ResponseEntity<BaseResponse> addAmmunition(Object ammunition) {
+    public BaseResponse addAmmunition(Object ammunition) {
         return null;
-    }
-
-    @Override
-    public ResponseEntity<BaseResponse> updateAmmunition(Object ammunition, Long id) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<BaseResponse> deleteAmmunition(Long id) {
-        try {
-
-            if(!repository.existsById(id))
-            {
-                return new ResponseEntity<>(new BaseResponse("Ammunition "+this.genericType.getSimpleName() +" was not found"), HttpStatus.NOT_FOUND);
-            }
-
-            repository.deleteById(id);
-
-            return new ResponseEntity<>(new BaseResponse("Ammunition was deleted"), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new BaseResponse("Ammunition was not deleted"), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 }

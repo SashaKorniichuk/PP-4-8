@@ -27,34 +27,34 @@ public class ShopService implements IShopService {
     }
 
     @Override
-    public ResponseEntity<BaseResponse> buyAmmunition(Long ammunitionId, Long knightId) {
+    public BaseResponse buyAmmunition(Long ammunitionId, Long knightId) {
         Optional<Knight> optionalKnight = knightRepository.findById(knightId);
         if (optionalKnight.isEmpty()) {
-            return new ResponseEntity<>(new BaseResponse("Knight was not found"), HttpStatus.NOT_FOUND);
+            return new BaseResponse("Knight was not found", HttpStatus.NOT_FOUND);
         }
         Knight knight = optionalKnight.get();
 
         Optional<Ammunition> optionalAmmunition = ammunitionRepository.findById(ammunitionId);
         if (optionalAmmunition.isEmpty()) {
-            return new ResponseEntity<>(new BaseResponse("Ammunition was not found"), HttpStatus.NOT_FOUND);
+            return new BaseResponse("Ammunition was not found", HttpStatus.NOT_FOUND);
         }
         Ammunition ammunition = optionalAmmunition.get();
         try {
             knight.getAmmunitions().add(ammunition);
             knightRepository.save(knight);
-            return new ResponseEntity<>(new BaseResponse("Ammunition was bought"), HttpStatus.OK);
+            return new BaseResponse("Ammunition was bought", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(new BaseResponse("Ammunition was not bought"), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new BaseResponse("Ammunition was not bought", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @Override
-    public ResponseEntity<ObservableList<Ammunition>> allAmmunition() {
+    public ObservableList<Ammunition> allAmmunition() {
 
         ObservableList<Ammunition> ammunition= FXCollections.observableArrayList();
         var amm=ammunitionRepository.findAll();
         amm.forEach(ammunition::add);
-        return new ResponseEntity<>(ammunition, HttpStatus.OK);
+        return ammunition;
     }
 
 }

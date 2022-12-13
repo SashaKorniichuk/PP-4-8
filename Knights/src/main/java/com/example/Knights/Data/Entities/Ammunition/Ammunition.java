@@ -49,7 +49,4 @@ public abstract class Ammunition {
     public String toString() {
         return "Cost: " + price + ". Weight: " + weight + ".";
     }
-
-
-
 }

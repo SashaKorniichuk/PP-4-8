@@ -19,40 +19,13 @@ public class HelmService extends AmmunitionService<Helm> {
         this.helmRepository = helmRepository;
     }
     @Override
-    public ResponseEntity<BaseResponse> addAmmunition(Object ammunition) {
+    public BaseResponse addAmmunition(Object ammunition) {
         try {
             Helm helm=(Helm) ammunition;
             helmRepository.save(new Helm(helm.getName(), helm.getCanTakeDamage(), helm.getSize(), helm.isCloseHelm(), helm.getPrice(), helm.getWeight()));
-            return new ResponseEntity<>(new BaseResponse("Ammunition Helm was added"), HttpStatus.CREATED);
+            return new BaseResponse("Ammunition Helm was added", HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>(new BaseResponse("Ammunition Helm was not added"), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
-    public ResponseEntity<BaseResponse> updateAmmunition(Object ammunition,Long id) {
-        try {
-            Helm helmViewModel=(Helm)ammunition;
-            var helm=helmRepository.findById(id);
-
-            if(helm.isEmpty())
-            {
-                return new ResponseEntity<>(new BaseResponse("Ammunition Helm was not found"), HttpStatus.NOT_FOUND);
-            }
-            Helm updateHelm=helm.get();
-
-            updateHelm.setName(helmViewModel.getName());
-            updateHelm.setSize(helmViewModel.getSize());
-            updateHelm.setCloseHelm(helmViewModel.isCloseHelm());
-            updateHelm.setCanTakeDamage(helmViewModel.getCanTakeDamage());
-            updateHelm.setPrice(helmViewModel.getPrice());
-            updateHelm.setWeight(helmViewModel.getWeight());
-
-            helmRepository.save(updateHelm);
-
-            return new ResponseEntity<>(new BaseResponse("Ammunition Helm was updated"), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new BaseResponse("Ammunition Helm was not updated"), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new BaseResponse("Ammunition Helm was not added", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

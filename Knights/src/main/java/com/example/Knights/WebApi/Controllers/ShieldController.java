@@ -1,8 +1,6 @@
 package com.example.Knights.WebApi.Controllers;
 
-import com.example.Knights.Data.Entities.Ammunition.Helm;
 import com.example.Knights.Data.Entities.Ammunition.Shield;
-import com.example.Knights.Domain.Response.BaseResponse;
 import com.example.Knights.Domain.Services.ShieldService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +14,6 @@ import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URL;
@@ -77,21 +74,6 @@ public class ShieldController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    @PostMapping("/addShield")
-    public ResponseEntity<BaseResponse> createShield(@RequestBody Shield shield) {
-        return shieldService.addAmmunition(shield);
-    }
-
-    @PutMapping ("/updateShield")
-    public ResponseEntity<BaseResponse> updateShield(@RequestBody Shield shield,Long id) {
-        return shieldService.updateAmmunition(shield,id);
-    }
-
-    @DeleteMapping ("/deleteShield")
-    public ResponseEntity<BaseResponse> deleteShield(Long id) {
-        return shieldService.deleteAmmunition(id);
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> list = FXCollections.observableArrayList("Small","Medium","Large");

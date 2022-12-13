@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <?import java.lang.Integer?>
+<?import javafx.scene.control.TextField?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image:url('background.png');-fx-background-size: cover;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Knights.WebApi.Controllers.KnightsAmmunitionController">
    <children>
 
@@ -28,5 +29,8 @@
       <Spinner fx:id="maxCost" layoutX="40.0" layoutY="445.0"  min="$min" max="$max" editable="true"/>
       <Label layoutX="38.0" layoutY="330.0" text="Min Cost" />
       <Label layoutX="38.0" layoutY="400.0" text="Max Cost" />
+      <Label layoutX="38.0" layoutY="470.0" text="Cost" />
+      <TextField fx:id="cost" layoutX="38.0" layoutY="515.0" />
+
    </children>
 </AnchorPane>

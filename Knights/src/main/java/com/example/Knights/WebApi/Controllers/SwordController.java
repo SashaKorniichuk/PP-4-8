@@ -17,11 +17,10 @@ import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:8080")
-@RestController
-@RequestMapping("/api")
+@Component
 @FxmlView("sword.fxml")
 public class SwordController {
     @FXML
@@ -75,19 +74,5 @@ public class SwordController {
         scene.getStylesheets().add(stylesheet);
         stage.setScene(scene);
         stage.show();
-    }
-    @PostMapping("/addSword")
-    public ResponseEntity<BaseResponse> createShield(@RequestBody Sword sword) {
-        return swordService.addAmmunition(sword);
-    }
-
-    @PutMapping ("/updateSword")
-    public ResponseEntity<BaseResponse> updateShield(@RequestBody Sword sword,Long id) {
-        return swordService.updateAmmunition(sword,id);
-    }
-
-    @DeleteMapping ("/deleteSword")
-    public ResponseEntity<BaseResponse> deleteShield(Long id) {
-        return swordService.deleteAmmunition(id);
     }
 }

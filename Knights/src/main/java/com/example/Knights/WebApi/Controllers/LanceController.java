@@ -75,18 +75,4 @@ public class LanceController {
         stage.setScene(scene);
         stage.show();
     }
-    @PostMapping("/addLance")
-    public ResponseEntity<BaseResponse> createLance(@RequestBody Lance lance) {
-        return lanceService.addAmmunition(lance);
-    }
-
-    @PutMapping ("/updateLance")
-    public ResponseEntity<BaseResponse> updateLance(@RequestBody Lance lance,Long id) {
-        return lanceService.updateAmmunition(lance,id);
-    }
-
-    @DeleteMapping ("/deleteLance")
-    public ResponseEntity<BaseResponse> deleteLance(Long id) {
-        return lanceService.deleteAmmunition(id);
-    }
 }

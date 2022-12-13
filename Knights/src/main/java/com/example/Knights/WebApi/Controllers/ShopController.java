@@ -131,19 +131,11 @@ public class ShopController implements Initializable {
         var selectedAmmunition=ammunitionList.getSelectionModel().getSelectedItem();
         selectedAmmunitionId=selectedAmmunition.getammunitionId();
     }
-    @PostMapping("/buyAmmunition")
-    public ResponseEntity<BaseResponse> buyAmmunition( Long ammunitionId, Long knightId) {
-        return shopService.buyAmmunition(ammunitionId,knightId);
-    }
-    @GetMapping("/allAmmunition")
-    public ResponseEntity<ObservableList<Ammunition>> allAmmunition()
-    {
-        return shopService.allAmmunition();
-    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.knightList.setItems(this.knightService.getAllKnights().getBody());
-        this.ammunitionList.setItems(this.shopService.allAmmunition().getBody());
+        this.knightList.setItems(this.knightService.getAllKnights());
+        this.ammunitionList.setItems(this.shopService.allAmmunition());
 
         this.knightList.getSelectionModel().select(0);
         this.selectedKnightId=knightList.getSelectionModel().getSelectedItem().getId();

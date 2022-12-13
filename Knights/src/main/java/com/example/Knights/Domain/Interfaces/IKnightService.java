@@ -10,19 +10,15 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface IKnightService {
-     ResponseEntity<BaseResponse> addKnight(Knight knightViewModel);
+     BaseResponse addKnight(Knight knightViewModel);
 
-     ResponseEntity<BaseResponse> updateKnight(Knight knightViewModel, Long id);
+     ObservableList<Ammunition> knightAmmunition(Long id) throws RestException;
 
-     ResponseEntity<BaseResponse> deleteKnight(Long id);
+     ObservableList<Ammunition> knightAmmunitionByWeight(Long id) throws RestException;
 
-     ResponseEntity<ObservableList<Ammunition>> knightAmmunition(Long id) throws RestException;
+    ObservableList<Ammunition> knightAmmunitionByCost(Long id) throws RestException;
 
-     ResponseEntity<ObservableList<Ammunition>> knightAmmunitionByWeight(Long id) throws RestException;
+     ObservableList<Ammunition> findAmmunitionByCostRange(Long id,int lLim,int rLim) throws RestException;
 
-     ResponseEntity<ObservableList<Ammunition>> knightAmmunitionByCost(Long id) throws RestException;
-
-     ResponseEntity<ObservableList<Ammunition>> findAmmunitionByCostRange(Long id,int lLim,int rLim) throws RestException;
-
-     ResponseEntity<ObservableList<Knight>> getAllKnights();
+     ObservableList<Knight> getAllKnights();
 }
